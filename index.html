@@ -9,10 +9,31 @@
 <script>
 
 $(document).ready(function(){
+
 $(".icon-desc").click(function () {
-	$(this).toggleClass("icon-desc");
-    $(this).toggleClass("icon-asec");
+
+var search= $(this).parent().text();
+
+$( "#driverTable thead tr th" ).each(function(){
+if( ($(this).text() ) == search )
+{
+   var $t = $(this);
+   $t.children('span').toggleClass("icon-desc");
+   $t.children('span').toggleClass("icon-asec");
+}
 });
+	
+$( "#driverTable tfoot tr th" ).each(function(){
+if( ($(this).text() ) == search )
+{
+   var $t = $(this);
+   $t.children('span').toggleClass("icon-desc");
+   $t.children('span').toggleClass("icon-asec");
+}
+});
+
+});
+
 });
 
 var app = angular.module('myApp', []);
@@ -191,12 +212,10 @@ $scope.sort= function(obj){
 	var queryType= obj.target.attributes.class.value;
 
 	if(query=='Name' || query=='DriveTime' ){
-		console.log(queryType);
 		if(queryType=="icon-asec"){
 			$scope.resultset.sort();
 		}
 		if (queryType=="icon-desc"){
-			console.log(queryType);
 			$scope.resultset.sort();	
 			$scope.resultset.reverse();		
 		}
@@ -262,9 +281,16 @@ $scope.sort= function(obj){
 	}
 	table{
 		margin-left: 15px;
+		color:gray;
 	}
-	.borderless td, .borderless th {
-	    border: none;
+	.table>thead>tr>th , .table>tfoot>tr>th {
+		border: 2px solid rgb(212, 207, 210);
+  		box-shadow: 1px 2px 10px 0px rgb(201, 193, 193);
+	}
+	.table>tbody>tr>td
+	{
+		border-top: none ! important;
+		border-right: 2px solid rgb(212, 207, 210);
 	}
 	.icon-asec{
 	    background: url('https://cdn.datatables.net/plug-ins/28e7751dbec/integration/bootstrap/images/sort_asc.png') no-repeat center right;
@@ -336,7 +362,7 @@ $scope.sort= function(obj){
 			    </div>
 		</div>
 		<div class="row table">
-			<table id="driverTable" class="table table-bordered borderless" cellspacing="0" >
+			<table id="driverTable" class="table" cellspacing="0" >
 		        <thead>
 		            <tr>
 		                <th>MANAGER<span class="icon-desc" ng-click="sort($event)" data="Name"></span></th>
