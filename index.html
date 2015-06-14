@@ -1,429 +1,451 @@
 <html>
 
-  <head>
-  	<title>ScoreBoard</title>
-  	<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+<head>
+    <title>ScoreBoard</title>
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
     <script src="http://code.jquery.com/jquery-1.10.0.min.js"></script>
-	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular.min.js"></script>
-  </head>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular.min.js"></script>
+</head>
 <script>
 
-$(document).ready(function(){
+    $(document).ready(function () {
 
-$(".icon-desc").click(function () {
+        $(".icon-desc").click(function () {
+            var search = $(this).parent().text();
+ 
+            $("#driverTable thead tr th").each(function () {
+                if (($(this).text()) == search) {
+                    var $t = $(this);
+                    $t.children('span').toggleClass("icon-desc");
+                    $t.children('span').toggleClass("icon-asec");
+                }
+            });
 
-var search= $(this).parent().text();
+            $("#driverTable tfoot tr th").each(function () {
+                if (($(this).text()) == search) {
+                    var $t = $(this);
+                    $t.children('span').toggleClass("icon-desc");
+                    $t.children('span').toggleClass("icon-asec");
+                }
+            });
 
-$( "#driverTable thead tr th" ).each(function(){
-if( ($(this).text() ) == search )
-{
-   var $t = $(this);
-   $t.children('span').toggleClass("icon-desc");
-   $t.children('span').toggleClass("icon-asec");
-}
-});
-	
-$( "#driverTable tfoot tr th" ).each(function(){
-if( ($(this).text() ) == search )
-{
-   var $t = $(this);
-   $t.children('span').toggleClass("icon-desc");
-   $t.children('span').toggleClass("icon-asec");
-}
-});
+        });
 
-});
+        $(".icon-asec").click(function () {
+            var searchRank = $(this).parent().text();
+            if (searchRank == 'RANK') {
+                $(this).toggleClass("icon-asec");
+                $(this).toggleClass("icon-desc");
+                $("#driverTable tfoot tr th").each(function () {
+                    if ($(this).text() == searchRank) {
+                        var $t = $(this);
+                        $t.children('span').toggleClass("icon-asec");
+                        $t.children('span').toggleClass("icon-desc");
+                    }
+                });
+            }
+        });
 
-$(".icon-asec").click(function () {
+    });
 
-var searchRank= $(this).parent().text();
+    var app = angular.module('myApp', []);
+    app.controller('myCtrl', function ($scope, $element) {
+        $scope.jsonArr = {
+            "Drivers":
+                [
+                    {
+                        "Driver":
+                            {
+                                "name": "JamesJacobs",
+                                "DriveTime": "33hr 59 m",
+                                "Date":
+                                    [
+                                        {
+                                            "date":
+                                                {
+                                                    "EventDate": "6/11/2015",
+                                                    "DailyScore": 2500,
+                                                    "DailyAllEvents": 15,
+                                                    "DailyHB": 25,
+                                                    "DailyRA": 10,
+                                                    "DailySP": 10,
+                                                    "DailyCR": 5
+                                                }
+                                        },
 
-if(searchRank=='RANK')
-{
-$(this).toggleClass("icon-asec");
-$(this).toggleClass("icon-desc");
+                                        {
+                                            "date":
+                                                {
+                                                    "EventDate": "6/10/2015",
+                                                    "DailyScore": 1500,
+                                                    "DailyAllEvents": 20,
+                                                    "DailyHB": 20,
+                                                    "DailyRA": 15,
+                                                    "DailySP": 15,
+                                                    "DailyCR": 10
+                                                }
+                                        }
+                                    ]
+                            }
 
-$("#driverTable tfoot tr th").each(function(){
+                    },
 
-if( $(this).text()== searchRank )
-{
-   var $t = $(this);
-  $t.children('span').toggleClass("icon-asec");	
-   $t.children('span').toggleClass("icon-desc");
-}
-});
-}
-});
+                    {
+                        "Driver":
 
-});
+                            {
+                                "name": "GaryGaitor",
+                                "DriveTime": "3hr 50 m",
+                                "Date":
+                                    [
+                                        {
+                                            "date":
+                                                {
+                                                    "EventDate": "6/11/2015",
+                                                    "DailyScore": 5000,
+                                                    "DailyAllEvents": 15,
+                                                    "DailyHB": 25,
+                                                    "DailyRA": 10,
+                                                    "DailySP": 10,
+                                                    "DailyCR": 5
+                                                }
+                                        },
 
-var app = angular.module('myApp', []);
-app.controller('myCtrl', function($scope,$element) {
-$scope.jsonArr = {
-	"Drivers": 
-		[ 
-			{
-				"Driver" :
-					{
-						"name":"JamesJacobs",
-						"DriveTime":"33hr 59 m",
-						"Date":
-							[
-								{
-									"date" :
-										{	
-											"EventDate":"6/11/2015",
-											"DailyScore":2500,
-											"DailyAllEvents":15,
-											"DailyHB":25,
-											"DailyRA":10,
-											"DailySP":10,
-											"DailyCR":5
-										}
-								},
+                                        {
+                                            "date":
+                                                {
+                                                    "EventDate": "6/10/2015",
+                                                    "DailyScore": 1500,
+                                                    "DailyAllEvents": 20,
+                                                    "DailyHB": 20,
+                                                    "DailyRA": 12,
+                                                    "DailySP": 15,
+                                                    "DailyCR": 10
+                                                }
+                                        }
+                                    ]
 
-								{
-									"date" :
-										{
-											"EventDate":"6/10/2015",
-											"DailyScore":1500,
-											"DailyAllEvents":20,
-											"DailyHB":20,
-											"DailyRA":15,
-											"DailySP":15,
-											"DailyCR":10
-										}
-								}
-							]
-					}
+                            }
 
-			},
+                    },
 
-			{
-				"Driver" :
+                    {
+                        "Driver":
 
-					{
-						"name":"GaryGaitor",
-						"DriveTime":"3hr 50 m",
-						"Date":
-							[
-								{
-									"date" :
-										{	
-											"EventDate":"6/11/2015",
-											"DailyScore":5000,
-											"DailyAllEvents":15,
-											"DailyHB":25,
-											"DailyRA":10,
-											"DailySP":10,
-											"DailyCR":5
-										}
-								},
+                            {
+                                "name": "BillyBishop",
+                                "DriveTime": "30hr 50 m",
+                                "Date":
+                                    [
+                                        {
+                                            "date":
+                                                {
+                                                    "EventDate": "6/11/2015",
+                                                    "DailyScore": 2500,
+                                                    "DailyAllEvents": 15,
+                                                    "DailyHB": 25,
+                                                    "DailyRA": 18,
+                                                    "DailySP": 10,
+                                                    "DailyCR": 5
+                                                }
+                                        },
 
-								{
-									"date" :
-										{
-											"EventDate":"6/10/2015",
-											"DailyScore":1500,
-											"DailyAllEvents":20,
-											"DailyHB":20,
-											"DailyRA":12,
-											"DailySP":15,
-											"DailyCR":10
-										}
-								}
-							]
+                                        {
+                                            "date":
+                                                {
+                                                    "EventDate": "6/10/2015",
+                                                    "DailyScore": 1000,
+                                                    "DailyAllEvents": 20,
+                                                    "DailyHB": 20,
+                                                    "DailyRA": 15,
+                                                    "DailySP": 15,
+                                                    "DailyCR": 10
+                                                }
+                                        }
+                                    ]
 
-					}
+                            }
+                    }
 
-			},
+                ]
+        };
 
-			{
-				"Driver" :
+        $scope.radioValue = 'Score';
+        var today = new Date();
+        var date = new Date(today.getTime() - 30 * 24 * 60 * 60 * 1000);
+        var formattedate = (date.getMonth() + 1) + '/' + date.getDate() + '/' + date.getFullYear();
 
-					{
-						"name":"BillyBishop",
-						"DriveTime":"30hr 50 m",
-						"Date":
-							[
-								{
-									"date" :
-										{	
-											"EventDate":"6/11/2015",
-											"DailyScore":2500,
-											"DailyAllEvents":15,
-											"DailyHB":25,
-											"DailyRA":18,
-											"DailySP":10,
-											"DailyCR":5
-										}
-								},
+        
+        $scope.getcheckedItem = function () {
+            var selectedOption = $scope.radioValue;
+            for (var props in $scope.jsonArr.Drivers[obj]) {
+                for (items in $scope.jsonArr.Drivers[obj][props]["Date"]) {
+                    var chartData = [];
+                    for (dailyVaues in $scope.jsonArr.Drivers[obj][props]["Date"][items]["date"]) {
+                            if (selectedOption == "Score") {
+                                chartData.Score = $scope.jsonArr.Drivers[obj][props]["Date"][items]["date"][dailyVaues]["DailyScore"];
+                                chartData.Date = $scope.jsonArr.Drivers[obj][props]["Date"][items]["date"][dailyVaues]["EventDate"];
+                                console.log(JSON.stringify(chartData));
+                            }
+                    }
 
-								{
-									"date" :
-										{
-											"EventDate":"6/10/2015",
-											"DailyScore":1000,
-											"DailyAllEvents":20,
-											"DailyHB":20,
-											"DailyRA":15,
-											"DailySP":15,
-											"DailyCR":10
-										}
-								}
-							]
+                }
+            }
+        }
 
-					}
-			}
+        $scope.resultset = [];
 
-		]
-};
-
-
-
-$scope.resultset=[];
-
-for (var obj in $scope.jsonArr.Drivers){
-$scope.result={};
-$scope.tableList={};	
-$scope.tableList.Name="";
-$scope.tableList.Score=0;
-$scope.tableList.AllEvents=0;
-$scope.tableList.DailyHB=0;
-$scope.tableList.DailyRA=0;
-$scope.tableList.DailySP=0;
-$scope.tableList.DailyCR=0;
-$scope.tableList.DriveTime=0;
-$scope.tableList.Rank="";
+        for (var obj in $scope.jsonArr.Drivers) {
+            $scope.result = {};
+            $scope.tableList = {};
+            $scope.tableList.Name = "";
+            $scope.tableList.Score = 0;
+            $scope.tableList.AllEvents = 0;
+            $scope.tableList.DailyHB = 0;
+            $scope.tableList.DailyRA = 0;
+            $scope.tableList.DailySP = 0;
+            $scope.tableList.DailyCR = 0;
+            $scope.tableList.DriveTime = 0;
+            $scope.tableList.Rank = "";
 
 
-	for (var props in $scope.jsonArr.Drivers[obj]){
+            for (var props in $scope.jsonArr.Drivers[obj]) {
 
-		$scope.tableList.Name=$scope.jsonArr.Drivers[obj][props]["name"];
-		$scope.tableList.DriveTime=$scope.jsonArr.Drivers[obj][props]["DriveTime"];
-			
-			for ( items in $scope.jsonArr.Drivers[obj][props]["Date"]){	
-					$scope.tableList.Score= $scope.tableList.Score + $scope.jsonArr.Drivers[obj][props]["Date"][items]["date"]["DailyScore"];
-					$scope.tableList.AllEvents= $scope.tableList.AllEvents + $scope.jsonArr.Drivers[obj][props]["Date"][items]["date"]["DailyAllEvents"];
-					$scope.tableList.DailyHB= $scope.tableList.DailyHB + $scope.jsonArr.Drivers[obj][props]["Date"][items]["date"]["DailyHB"];
-					$scope.tableList.DailyRA= $scope.tableList.DailyRA + $scope.jsonArr.Drivers[obj][props]["Date"][items]["date"]["DailyRA"];
-					$scope.tableList.DailySP= $scope.tableList.DailySP + $scope.jsonArr.Drivers[obj][props]["Date"][items]["date"]["DailySP"];
-					$scope.tableList.DailyCR= $scope.tableList.DailyCR + $scope.jsonArr.Drivers[obj][props]["Date"][items]["date"]["DailyCR"];					 
-				}
-		}		
-	$scope.result.Name=	$scope.tableList.Name;
-	$scope.result.Rank= $scope.tableList.Rank;
-	$scope.result.Score= $scope.tableList.Score;
-	$scope.result.AllEvents= $scope.tableList.AllEvents;
-	$scope.result.HB= $scope.tableList.DailyHB;
-	$scope.result.RA= $scope.tableList.DailyRA;
-	$scope.result.SP= $scope.tableList.DailySP;
-	$scope.result.CR= $scope.tableList.DailyCR;
-	$scope.result.DriveTime= $scope.tableList.DriveTime;
-	$scope.resultset.push($scope.result);
-	$scope.resultset.sort(function(a, b) {
-    return parseFloat(b.Score) - parseFloat(a.Score);
-	});
-	for(i=0;i<$scope.resultset.length;i++){
-		$scope.resultset[i].Rank=i+1;
-	}
-}
-$scope.sort= function(obj){	
-	var query = obj.target.attributes.data.value;
-	var queryType= obj.target.attributes.class.value;
+                $scope.tableList.Name = $scope.jsonArr.Drivers[obj][props]["name"];
+                $scope.tableList.DriveTime = $scope.jsonArr.Drivers[obj][props]["DriveTime"];
 
-	if(query=='Name' || query=='DriveTime' ){
-		if(queryType=="icon-asec"){
-			$scope.resultset.sort();
-		}
-		if (queryType=="icon-desc"){
-			$scope.resultset.sort();	
-			$scope.resultset.reverse();		
-		}
-	}
-	else{
-		$scope.resultset.sort(function(a, b) {
-				for(props in a){
-					if(props==query){
-						if(queryType=="icon-desc")
-							return (a[props]) - (b[props]);
-						if (queryType=="icon-asec")
-							return (b[props]) - (a[props]);
-					}
-				}
-		});
-	}
-};
+                for (items in $scope.jsonArr.Drivers[obj][props]["Date"]) {
+                    $scope.tableList.Score = $scope.tableList.Score + $scope.jsonArr.Drivers[obj][props]["Date"][items]["date"]["DailyScore"];
+                    $scope.tableList.AllEvents = $scope.tableList.AllEvents + $scope.jsonArr.Drivers[obj][props]["Date"][items]["date"]["DailyAllEvents"];
+                    $scope.tableList.DailyHB = $scope.tableList.DailyHB + $scope.jsonArr.Drivers[obj][props]["Date"][items]["date"]["DailyHB"];
+                    $scope.tableList.DailyRA = $scope.tableList.DailyRA + $scope.jsonArr.Drivers[obj][props]["Date"][items]["date"]["DailyRA"];
+                    $scope.tableList.DailySP = $scope.tableList.DailySP + $scope.jsonArr.Drivers[obj][props]["Date"][items]["date"]["DailySP"];
+                    $scope.tableList.DailyCR = $scope.tableList.DailyCR + $scope.jsonArr.Drivers[obj][props]["Date"][items]["date"]["DailyCR"];
+                }
+            }
+            $scope.result.Name = $scope.tableList.Name;
+            $scope.result.Rank = $scope.tableList.Rank;
+            $scope.result.Score = $scope.tableList.Score;
+            $scope.result.AllEvents = $scope.tableList.AllEvents;
+            $scope.result.HB = $scope.tableList.DailyHB;
+            $scope.result.RA = $scope.tableList.DailyRA;
+            $scope.result.SP = $scope.tableList.DailySP;
+            $scope.result.CR = $scope.tableList.DailyCR;
+            $scope.result.DriveTime = $scope.tableList.DriveTime;
+            $scope.resultset.push($scope.result);
+            $scope.resultset.sort(function (a, b) {
+                return parseFloat(b.Score) - parseFloat(a.Score);
+            });
+            for (i = 0; i < $scope.resultset.length; i++) {
+                $scope.resultset[i].Rank = i + 1;
+            }
+        }
+        $scope.sort = function (obj) {
+            var query = obj.target.attributes.data.value;
+            var queryType = obj.target.attributes.class.value;
 
-});
+            if (query == 'Name' || query == 'DriveTime') {
+                if (queryType == "icon-asec") {
+                    $scope.resultset.sort();
+                }
+                if (queryType == "icon-desc") {
+                    $scope.resultset.sort();
+                    $scope.resultset.reverse();
+                }
+            }
+            else {
+                $scope.resultset.sort(function (a, b) {
+                    for (props in a) {
+                        if (props == query) {
+                            if (queryType == "icon-desc")
+                                return (a[props]) - (b[props]);
+                            if (queryType == "icon-asec")
+                                return (b[props]) - (a[props]);
+                        }
+                    }
+                });
+            }
+        }
+
+    });
 </script>
 <style>
-	body{
-		background-color: rgb(241, 241, 241);
-		overflow-x:hidden;
-	}
-	.dropdown-days{
-		width: 50%;
-		border:0px solid;
-		color: rgb(100, 160, 225);
-		height: 30px;
-		box-shadow: none;
-		background-color: rgb(241, 241, 241);
-	}
-	.header{
-	    line-height: 1.5;
-	    color: rgb(69, 72, 63);
-	    font-family: "calbri";
-	    box-shadow: 0 4px 9px -2px rgb(201, 193, 193);
-	}
-	.span-scoreboard{
-		font-size: 30px;
-  		margin-top: -15px;
-	}
-	.header span{
+    body {
+        background-color: rgb(241, 241, 241);
+        overflow-x: hidden;
+    }
 
-	}
-	.content{
-		padding-top: 15px;
-	}
-	.left-search span{
-		font-size: 15px;
-  		font-weight: bold;
-  		font-family: "Times New Roman", Georgia, Serif;
-	}
-	.search-checkboxes{
-		padding-top: 25%;
-	}
-	.div-checkboxes>label{
-		font-weight: normal ! important;
-	}
-	.chartType-checkboxes{
-		padding-top: 55%;
-	}
-	table{
-		margin-left: 15px;
-		color:gray;
-	}
-	.table>thead>tr>th , .table>tfoot>tr>th {
-		border: 2px solid rgb(212, 207, 210);
-  		box-shadow: 1px 2px 10px 0px rgb(201, 193, 193);
-	}
-	.table>tbody>tr>td
-	{
-		border-top: none ! important;
-		border-right: 2px solid rgb(212, 207, 210);
-	}
-	.icon-asec{
-	    background: url('https://cdn.datatables.net/plug-ins/28e7751dbec/integration/bootstrap/images/sort_asc.png') no-repeat center right;
-	    padding-left: 25px;
-	    padding-bottom: 6px;
-	    float: right;
-  		padding-top: 16px;
-	}
-	.icon-desc{
-	    background: url('https://cdn.datatables.net/plug-ins/28e7751dbec/integration/bootstrap/images/sort_desc.png') no-repeat center right;
-	    padding-left: 25px;
-	    padding-top: 7px;
-	    float: right;
-  		padding-top: 14px;
-	}
+    .dropdown-days {
+        width: 50%;
+        border: 0px solid;
+        color: rgb(100, 160, 225);
+        height: 30px;
+        box-shadow: none;
+        background-color: rgb(241, 241, 241);
+    }
 
+    .header {
+        line-height: 1.5;
+        color: rgb(69, 72, 63);
+        font-family: "calbri";
+        box-shadow: 0 4px 9px -2px rgb(201, 193, 193);
+    }
 
+    .span-scoreboard {
+        font-size: 30px;
+        margin-top: -15px;
+    }
+
+    .header span {
+    }
+
+    .content {
+        padding-top: 15px;
+    }
+
+    .left-search span {
+        font-size: 15px;
+        font-weight: bold;
+        font-family: "Times New Roman", Georgia, Serif;
+    }
+
+    .search-checkboxes {
+        padding-top: 25%;
+    }
+
+    .div-checkboxes > label {
+        font-weight: normal !important;
+    }
+
+    .chartType-checkboxes {
+        padding-top: 55%;
+    }
+
+    table {
+        margin-left: 15px;
+        color: gray;
+    }
+
+    .table > thead > tr > th, .table > tfoot > tr > th {
+        border: 2px solid rgb(212, 207, 210);
+        box-shadow: 1px 2px 10px 0px rgb(201, 193, 193);
+    }
+
+    .table > tbody > tr > td {
+        border-top: none !important;
+        border-right: 2px solid rgb(212, 207, 210);
+    }
+
+    .icon-asec {
+        background: url('https://cdn.datatables.net/plug-ins/28e7751dbec/integration/bootstrap/images/sort_asc.png') no-repeat center right;
+        padding-left: 25px;
+        padding-bottom: 6px;
+        float: right;
+        padding-top: 16px;
+    }
+
+    .icon-desc {
+        background: url('https://cdn.datatables.net/plug-ins/28e7751dbec/integration/bootstrap/images/sort_desc.png') no-repeat center right;
+        padding-left: 25px;
+        padding-top: 7px;
+        float: right;
+        padding-top: 14px;
+    }
 </style>
-  <body ng-app="myApp" ng-controller="myCtrl">
-		<div class="row header">
-			<div class="col-lg-7">
-				<SPAN class="col-lg-12 span-company">COMPANY NAME</SPAN>
-				<span class="col-lg-12 span-scoreboard" >Scoreboard</span>
-				</div>
-			<div class="col-lg-5">
-				<span class="col-lg-12" >TIME PERIOD</span>
-				<span class="col-lg-6" >...</span>
-				<select class="form-control col-lg-6 dropdown-days">
-				        <option selected>Last 30 Days</option>
-				        <option selected>Last 30 Days</option>
-				</select>
-			</div>
-		</div>
-		<div class="row content">
-				<div class="left-search col-lg-4"> 
-					<span class="col-lg-8">DRIVERS SCORE</span>	
-					<span class="col-lg-10">FOR THE LAST 30 DAYS</span>
-					<div class="search-checkboxes">
-						<span class="col-lg-8">SHOW:</span>
-						<div class="col-lg-8 div-checkboxes">
-	                        <input class="col-lg-1" type="radio" value="option1" name="radioption" checked="">
-	                        <label class="col-lg-11" for="inlineRadio1"> Driver Score </label>
-	                        <input class="col-lg-1" type="radio" value="option2" name="radioption">
-	                        <label class="col-lg-11" for="inlineRadio2"> Driver Rank </label>
-	                        <input class="col-lg-1" type="radio" value="option3" name="radioption">
-	                        <label class="col-lg-11" for="inlineRadio3"> All Events </label>
-	                        <input class="col-lg-1" type="radio" value="option4" name="radioption">
-	                        <label class="col-lg-11" for="inlineRadio4"> Hard Brake </label>
-	                        <input class="col-lg-1" type="radio" value="option5" name="radioption">
-	                        <label class="col-lg-11" for="inlineRadio5"> Rapid Accelaration </label>
-	                        <input class="col-lg-1" type="radio" value="option6" name="radioption">
-	                        <label class="col-lg-11" for="inlineRadio6"> Speeding </label>
-	                        <input class="col-lg-1" type="radio" value="option7" name="radioption">
-	                        <label class="col-lg-11" for="inlineRadio7"> Crash </label>
-						</div>
-					</div>
-					<div class="chartType-checkboxes">
-						<span class="col-lg-8">CHART SETTINGS:</span>
-						<div class="col-lg-8 div-checkboxes">
-	                        <input class="col-lg-1" type="radio" value="option1" name="radiocharts" checked="">
-	                        <label class="col-lg-11" for="inlineRadio1"> Line </label>
-	                        <input class="col-lg-1" type="radio" value="option2" name="radiocharts">
-	                        <label class="col-lg-11" for="inlineRadio2"> Column Bar</label>
-						</div>
-					</div>
-			    </div>
-			    <div id="chart_area" class="col-lg-8">
+<body ng-app="myApp" ng-controller="myCtrl">
+    <div class="row header">
+        <div class="col-lg-7">
+            <span class="col-lg-12 span-company">COMPANY NAME</span>
+            <span class="col-lg-12 span-scoreboard">Scoreboard</span>
+        </div>
+        <div class="col-lg-5">
+            <span class="col-lg-12">TIME PERIOD</span>
+            <span class="col-lg-6">...</span>
+            <select class="form-control col-lg-6 dropdown-days">
+                <option selected>Last 30 Days</option>
+                <option selected>Last 30 Days</option>
+            </select>
+        </div>
+    </div>
+    <div class="row content">
+        <div class="left-search col-lg-4">
+            <span class="col-lg-8">DRIVERS SCORE</span>
+            <span class="col-lg-10">FOR THE LAST 30 DAYS</span>
+            <div class="search-checkboxes">
+                <span class="col-lg-8">SHOW:</span>
+                <div class="col-lg-8 div-checkboxes">
+                    <input class="col-lg-1" type="radio" ng-model="radioValue" value="Score" name="radioption" ng-change='getcheckedItem(value)'>
+                    <label class="col-lg-11" for="inlineRadio1"> Driver Score </label>
+                    <input class="col-lg-1" type="radio" ng-model="radioValue" value="Rank" name="radioption" ng-change='getcheckedItem(value)'>
+                    <label class="col-lg-11" for="inlineRadio2"> Driver Rank </label>
+                    <input class="col-lg-1" type="radio" value="events" name="radioption" ng-model="radioValue" ng-change='getcheckedItem(value)'>
+                    <label class="col-lg-11" for="inlineRadio3"> All Events </label>
+                    <input class="col-lg-1" type="radio" value="hb" name="radioption" ng-model="radioValue" ng-change='getcheckedItem(value)'>
+                    <label class="col-lg-11" for="inlineRadio4"> Hard Brake </label>
+                    <input class="col-lg-1" type="radio" value="ra" name="radioption" ng-model="radioValue" ng-change='getcheckedItem(value)'>
+                    <label class="col-lg-11" for="inlineRadio5"> Rapid Accelaration </label>
+                    <input class="col-lg-1" type="radio" value="sp" name="radioption" ng-model="radioValue" ng-change='getcheckedItem(value)'>
+                    <label class="col-lg-11" for="inlineRadio6"> Speeding </label>
+                    <input class="col-lg-1" type="radio" value="cr" name="radioption" ng-model="radioValue" ng-change='getcheckedItem(value)'>
+                    <label class="col-lg-11" for="inlineRadio7"> Crash </label>
+                </div>
+            </div>
+            <div class="chartType-checkboxes">
+                <span class="col-lg-8">CHART SETTINGS:</span>
+                <div class="col-lg-8 div-checkboxes">
+                    <input class="col-lg-1" type="radio" value="option1" name="radiocharts" checked="">
+                    <label class="col-lg-11" for="inlineRadio1"> Line </label>
+                    <input class="col-lg-1" type="radio" value="option2" name="radiocharts">
+                    <label class="col-lg-11" for="inlineRadio2"> Column Bar</label>
+                </div>
+            </div>
+        </div>
+        <div id="chart_area" class="col-lg-8">
 
-			    </div>
-		</div>
-		<div class="row table">
-			<table id="driverTable" class="table" cellspacing="0" >
-		        <thead>
-		            <tr>
-		                <th>MANAGER<span class="icon-desc" ng-click="sort($event)" data="Name"></span></th>
-		                <th>RANK<span class="icon-asec" ng-click="sort($event)" data="Rank"></span></th>
-		                <th>SCORE<span class="icon-desc" ng-click="sort($event)" data="Score"></span></th>
-		                <th>BRAKING<span class="icon-desc" ng-click="sort($event)" data="HB"></span></th>
-		                <th>ACCELARATION<span class="icon-desc" ng-click="sort($event)" data="RA"></span></th>
-		                <th>SPEEDING<span class="icon-desc" ng-click="sort($event)" data="SP"></span></th>
-		                <th># OF EVENTS<span class="icon-desc" ng-click="sort($event)" data="AllEvents"></span></th>
-		                <th>DRIVE TIME<span class="icon-desc" ng-click="sort($event)" data="DriveTime"></span></th>
-		            </tr>
-		        </thead>
- 
-		        <tfoot>
-		            <tr>
-		                <th>MANAGER<span class="icon-desc" ng-click="sort($event)" data="Name"></span></th>
-		                <th>RANK<span class="icon-asec" ng-click="sort($event)" data="Rank"></span></th>
-		                <th>SCORE<span class="icon-desc" ng-click="sort($event)" data="Score"></span></th>
-		                <th>BRAKING<span class="icon-desc" ng-click="sort($event)" data="HB"></span></th>
-		                <th>ACCELARATION<span class="icon-desc" ng-click="sort($event)" data="RA"></span></th>
-		                <th>SPEEDING<span class="icon-desc" ng-click="sort($event)" data="SP"></span></th>
-		                <th># OF EVENTS<span class="icon-desc" ng-click="sort($event)" data="AllEvents"></span></th>
-		                <th>DRIVE TIME<span class="icon-desc" ng-click="sort($event)" data="DriveTime"></span></th>
-		            </tr>
-		        </tfoot>
- 
-		        <tbody>
-		        <tr ng-repeat="item in resultset">
-		         <td>{{item.Name}}</td>
-		         <td>{{item.Rank}}</td>
-		         <td>{{item.Score}}</td>
-		         <td>{{item.HB}}</td>
-		         <td>{{item.RA}}</td>
-		         <td>{{item.SP}}</td>
-		         <td>{{item.AllEvents}}</td>
-		         <td>{{item.DriveTime}}</td>
-		        </tr>
-		        </tbody>
+        </div>
+    </div>
+    <div class="row table">
+        <table id="driverTable" class="table" cellspacing="0">
+            <thead>
+                <tr>
+                    <th>MANAGER<span class="icon-desc" ng-click="sort($event)" data="Name"></span></th>
+                    <th>RANK<span class="icon-asec" ng-click="sort($event)" data="Rank"></span></th>
+                    <th>SCORE<span class="icon-desc" ng-click="sort($event)" data="Score"></span></th>
+                    <th>BRAKING<span class="icon-desc" ng-click="sort($event)" data="HB"></span></th>
+                    <th>ACCELARATION<span class="icon-desc" ng-click="sort($event)" data="RA"></span></th>
+                    <th>SPEEDING<span class="icon-desc" ng-click="sort($event)" data="SP"></span></th>
+                    <th># OF EVENTS<span class="icon-desc" ng-click="sort($event)" data="AllEvents"></span></th>
+                    <th>DRIVE TIME<span class="icon-desc" ng-click="sort($event)" data="DriveTime"></span></th>
+                </tr>
+            </thead>
 
-		    </table>
-		</div>
-  </body>
-  </html>
+            <tfoot>
+                <tr>
+                    <th>MANAGER<span class="icon-desc" ng-click="sort($event)" data="Name"></span></th>
+                    <th>RANK<span class="icon-asec" ng-click="sort($event)" data="Rank"></span></th>
+                    <th>SCORE<span class="icon-desc" ng-click="sort($event)" data="Score"></span></th>
+                    <th>BRAKING<span class="icon-desc" ng-click="sort($event)" data="HB"></span></th>
+                    <th>ACCELARATION<span class="icon-desc" ng-click="sort($event)" data="RA"></span></th>
+                    <th>SPEEDING<span class="icon-desc" ng-click="sort($event)" data="SP"></span></th>
+                    <th># OF EVENTS<span class="icon-desc" ng-click="sort($event)" data="AllEvents"></span></th>
+                    <th>DRIVE TIME<span class="icon-desc" ng-click="sort($event)" data="DriveTime"></span></th>
+                </tr>
+            </tfoot>
+
+            <tbody>
+                <tr ng-repeat="item in resultset">
+                    <td>{{item.Name}}</td>
+                    <td>{{item.Rank}}</td>
+                    <td>{{item.Score}}</td>
+                    <td>{{item.HB}}</td>
+                    <td>{{item.RA}}</td>
+                    <td>{{item.SP}}</td>
+                    <td>{{item.AllEvents}}</td>
+                    <td>{{item.DriveTime}}</td>
+                </tr>
+            </tbody>
+
+        </table>
+    </div>
+</body>
+</html>
