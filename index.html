@@ -5,8 +5,59 @@
     <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
     <script src="http://code.jquery.com/jquery-1.10.0.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular.min.js"></script>
+    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
 </head>
 <script>
+
+    function drawChart(chartData) {
+
+        var parts = chartData.Date.split("/");
+        var dt = new Date(parseInt(parts[2], 10),
+                          parseInt(parts[1], 10) - 1,
+                          parseInt(parts[0], 10));
+        console.log(dt);
+        var data = google.visualization.arrayToDataTable([['Month', 'Sales'], [new Date(chartData.Date), chartData.Score]]);
+
+        // get the range of dates
+        var range = data.getColumnRange(0);
+        // pull back the start just a bit so the first axis label will show
+        range.min = new Date(range.min);
+        range.min.setMilliseconds(-1);
+
+        // format the dates
+        var dateFormatter = new google.visualization.DateFormat({ pattern: 'MMM-DD-YYYY' });
+        dateFormatter.format(data, 0);
+
+        var options = {
+            title: 'Sample graph',
+            legend: {
+                position: 'bottom'
+            },
+            height: 400,
+            interpolateNulls: true,
+            pointSize: 5,
+            vAxis: {
+                title: "Count",
+                minValue: 0,
+            },
+            hAxis: {
+                title: "Month",
+                format: 'MMM-yy',
+                viewWindow: {
+                    min: range.min,
+                    max: range.max
+                }
+            },
+            animation: {
+                duration: 1000,
+                easing: 'in'
+            },
+        };
+
+        var chart = new google.visualization.LineChart(document.getElementById('chart_area'));
+        chart.draw(data, options);
+    }
+    google.load("visualization", "1", { packages: ["corechart"], callback: drawChart });
 
     $(document).ready(function () {
 
@@ -178,19 +229,24 @@
         
         $scope.getcheckedItem = function () {
             var selectedOption = $scope.radioValue;
-            for (var props in $scope.jsonArr.Drivers[obj]) {
-                for (items in $scope.jsonArr.Drivers[obj][props]["Date"]) {
-                    var chartData = [];
-                    for (dailyVaues in $scope.jsonArr.Drivers[obj][props]["Date"][items]["date"]) {
-                            if (selectedOption == "Score") {
-                                chartData.Score = $scope.jsonArr.Drivers[obj][props]["Date"][items]["date"][dailyVaues]["DailyScore"];
-                                chartData.Date = $scope.jsonArr.Drivers[obj][props]["Date"][items]["date"][dailyVaues]["EventDate"];
-                                console.log(JSON.stringify(chartData));
-                            }
-                    }
+            var chartData = [];
+            for (var obj in $scope.jsonArr.Drivers) {
+                for (var props in $scope.jsonArr.Drivers[obj]) {
+                    var dailyScoreObj= {};
+                    
 
+                    for (items in $scope.jsonArr.Drivers[obj][props]["Date"]) {
+                        if (selectedOption == "Score") {
+                            
+                            dailyScoreObj.Date = $scope.jsonArr.Drivers[obj][props]["Date"][items].date.EventDate;
+                            dailyScoreObj.Score = $scope.jsonArr.Drivers[obj][props]["Date"][items].date.DailyScore;
+                            dailyScoreObj.Name = $scope.jsonArr.Drivers[obj][props].name;
+                        }
+                        chartData.push(dailyScoreObj);
+                    }
                 }
             }
+            drawChart(chartData);
         }
 
         $scope.resultset = [];
