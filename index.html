@@ -34,6 +34,27 @@ if( ($(this).text() ) == search )
 
 });
 
+$(".icon-asec").click(function () {
+
+var searchRank= $(this).parent().text();
+
+if(searchRank=='RANK')
+{
+$(this).toggleClass("icon-asec");
+$(this).toggleClass("icon-desc");
+
+$("#driverTable tfoot tr th").each(function(){
+
+if( $(this).text()== searchRank )
+{
+   var $t = $(this);
+  $t.children('span').toggleClass("icon-asec");	
+   $t.children('span').toggleClass("icon-desc");
+}
+});
+}
+});
+
 });
 
 var app = angular.module('myApp', []);
@@ -366,7 +387,7 @@ $scope.sort= function(obj){
 		        <thead>
 		            <tr>
 		                <th>MANAGER<span class="icon-desc" ng-click="sort($event)" data="Name"></span></th>
-		                <th>RANK<span class="icon-desc" ng-click="sort($event)" data="Rank"></span></th>
+		                <th>RANK<span class="icon-asec" ng-click="sort($event)" data="Rank"></span></th>
 		                <th>SCORE<span class="icon-desc" ng-click="sort($event)" data="Score"></span></th>
 		                <th>BRAKING<span class="icon-desc" ng-click="sort($event)" data="HB"></span></th>
 		                <th>ACCELARATION<span class="icon-desc" ng-click="sort($event)" data="RA"></span></th>
@@ -379,7 +400,7 @@ $scope.sort= function(obj){
 		        <tfoot>
 		            <tr>
 		                <th>MANAGER<span class="icon-desc" ng-click="sort($event)" data="Name"></span></th>
-		                <th>RANK<span class="icon-desc" ng-click="sort($event)" data="Rank"></span></th>
+		                <th>RANK<span class="icon-asec" ng-click="sort($event)" data="Rank"></span></th>
 		                <th>SCORE<span class="icon-desc" ng-click="sort($event)" data="Score"></span></th>
 		                <th>BRAKING<span class="icon-desc" ng-click="sort($event)" data="HB"></span></th>
 		                <th>ACCELARATION<span class="icon-desc" ng-click="sort($event)" data="RA"></span></th>
