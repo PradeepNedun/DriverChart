@@ -1,3 +1,4 @@
+??
 <html>
 
 <head>
@@ -9,55 +10,87 @@
 </head>
 <script>
 
+function getnames(chartData){
+	var names=[];
+	var temp=null;
+	for( i=0;i<chartData.length;i++){
+		if(names.length > 0){
+			if(names.indexOf(chartData[i].Name) >-1){	
+				names = names;
+			}
+			else{
+				names.push(chartData[i].Name);
+			}
+		}
+		else{
+			names.push(chartData[i].Name);
+		}
+	}
+	return names;
+}
+
     function drawChart(chartData) {
+    	var rowData=[];
+    	rowData.push(getnames(chartData));
+    	rowData[0].push("Date", "Score")
+    	
+    	var lastItem = rowData[0].pop();
+    	console.log(lastItem);
+    	var lastBefore= rowData[0].pop();
+    	console.log(lastBefore);
+    	rowData[0].splice(0, 0, lastBefore, lastItem);
 
-        var parts = chartData.Date.split("/");
-        var dt = new Date(parseInt(parts[2], 10),
-                          parseInt(parts[1], 10) - 1,
-                          parseInt(parts[0], 10));
-        console.log(dt);
-        var data = google.visualization.arrayToDataTable([['Month', 'Sales'], [new Date(chartData.Date), chartData.Score]]);
 
-        // get the range of dates
-        var range = data.getColumnRange(0);
-        // pull back the start just a bit so the first axis label will show
-        range.min = new Date(range.min);
-        range.min.setMilliseconds(-1);
+		for( i=1;i<chartData.length;i++){
+			for(j=0;j<chartData.length;j++){
+				rowData[i].push([new Date(chartData[j].date),chartData[j].Score, chartData[j].Name],chartData[i].Name]);
+			}
+			
+	    }
 
-        // format the dates
-        var dateFormatter = new google.visualization.DateFormat({ pattern: 'MMM-DD-YYYY' });
-        dateFormatter.format(data, 0);
-
-        var options = {
-            title: 'Sample graph',
-            legend: {
-                position: 'bottom'
-            },
-            height: 400,
-            interpolateNulls: true,
-            pointSize: 5,
-            vAxis: {
-                title: "Count",
-                minValue: 0,
-            },
-            hAxis: {
-                title: "Month",
-                format: 'MMM-yy',
-                viewWindow: {
-                    min: range.min,
-                    max: range.max
-                }
-            },
-            animation: {
-                duration: 1000,
-                easing: 'in'
-            },
-        };
-
-        var chart = new google.visualization.LineChart(document.getElementById('chart_area'));
-        chart.draw(data, options);
-    }
-    google.load("visualization", "1", { packages: ["corechart"], callback: drawChart });
+     console.log(JSON.stringify(rowData));
+     var data = google.visualization.arrayToDataTable(rowData);
+    
+    // get the range of dates
+    var range = data.getColumnRange(0);
+    // pull back the start just a bit so the first axis label will show
+    range.min = new Date(range.min);
+    range.min.setMilliseconds(-1);
+    
+    // format the dates
+    var dateFormatter = new google.visualization.DateFormat({pattern: 'MMM-yy'});
+    dateFormatter.format(data, 0);
+    
+    var options = {
+        title : 'Sample graph',
+        legend : {
+            position : 'bottom'
+        },
+        height : 400,
+        interpolateNulls : true,
+        pointSize : 5,
+        vAxis : {
+            title : "Count",
+            minValue : 0,
+        },
+        hAxis : {
+            title : "Month",
+            format: 'MMM-yy',
+            viewWindow: {
+                min: range.min,
+                max: range.max
+            }
+        },
+        animation : {
+            duration : 1000,
+            easing : 'in'
+        },
+    };
+    
+    var chart = new google.visualization.LineChart(document.getElementById('chart_area'));
+    chart.draw(data, options);
+}
+google.load("visualization", "1", {packages:["corechart"], callback: drawChart});
 
     $(document).ready(function () {
 
@@ -222,6 +255,7 @@
         };
 
         $scope.radioValue = 'Score';
+        $scope.chartType = 'linechart';
         var today = new Date();
         var date = new Date(today.getTime() - 30 * 24 * 60 * 60 * 1000);
         var formattedate = (date.getMonth() + 1) + '/' + date.getDate() + '/' + date.getFullYear();
@@ -232,20 +266,48 @@
             var chartData = [];
             for (var obj in $scope.jsonArr.Drivers) {
                 for (var props in $scope.jsonArr.Drivers[obj]) {
-                    var dailyScoreObj= {};
-                    
-
+                               
                     for (items in $scope.jsonArr.Drivers[obj][props]["Date"]) {
-                        if (selectedOption == "Score") {
-                            
-                            dailyScoreObj.Date = $scope.jsonArr.Drivers[obj][props]["Date"][items].date.EventDate;
+                    	var dailyScoreObj= {}; 
+                        if (selectedOption == "Score") {              
+                            dailyScoreObj.date = $scope.jsonArr.Drivers[obj][props]["Date"][items].date.EventDate;
                             dailyScoreObj.Score = $scope.jsonArr.Drivers[obj][props]["Date"][items].date.DailyScore;
                             dailyScoreObj.Name = $scope.jsonArr.Drivers[obj][props].name;
+                            chartData.push(dailyScoreObj);
                         }
-                        chartData.push(dailyScoreObj);
+                       	if (selectedOption == "Events") {       
+                       		dailyScoreObj.date = $scope.jsonArr.Drivers[obj][props]["Date"][items].date.EventDate;
+                       		dailyScoreObj.events = $scope.jsonArr.Drivers[obj][props]["Date"][items].date.DailyAllEvents;
+                            dailyScoreObj.Name = $scope.jsonArr.Drivers[obj][props].name;
+                            chartData.push(dailyScoreObj);
+                        }
+                        if (selectedOption == "hb") {       
+                       		dailyScoreObj.date = $scope.jsonArr.Drivers[obj][props]["Date"][items].date.EventDate;
+                       		dailyScoreObj.hb = $scope.jsonArr.Drivers[obj][props]["Date"][items].DailyHB.DailyAllEvents;
+                            dailyScoreObj.Name = $scope.jsonArr.Drivers[obj][props].name;
+                            chartData.push(dailyScoreObj);
+                        }
+                        if (selectedOption == "ra") {       
+                       		dailyScoreObj.date = $scope.jsonArr.Drivers[obj][props]["Date"][items].date.EventDate;
+                       		dailyScoreObj.ra = $scope.jsonArr.Drivers[obj][props]["Date"][items].DailyRA;
+                            dailyScoreObj.Name = $scope.jsonArr.Drivers[obj][props].name;
+                            chartData.push(dailyScoreObj);
+                        }
+                        if (selectedOption == "sp") {       
+                       		dailyScoreObj.date = $scope.jsonArr.Drivers[obj][props]["Date"][items].date.EventDate;
+                       		dailyScoreObj.sp = $scope.jsonArr.Drivers[obj][props]["Date"][items].DailySP;
+                            dailyScoreObj.Name = $scope.jsonArr.Drivers[obj][props].name;
+                            chartData.push(dailyScoreObj);
+                        }
+                        if (selectedOption == "cr") {       
+                       		dailyScoreObj.date = $scope.jsonArr.Drivers[obj][props]["Date"][items].date.EventDate;
+                       		dailyScoreObj.cr = $scope.jsonArr.Drivers[obj][props]["Date"][items].DailyCR;
+                            dailyScoreObj.Name = $scope.jsonArr.Drivers[obj][props].name;
+                            chartData.push(dailyScoreObj);
+                        }
+                    }
                     }
                 }
-            }
             drawChart(chartData);
         }
 
@@ -434,7 +496,7 @@
                     <label class="col-lg-11" for="inlineRadio1"> Driver Score </label>
                     <input class="col-lg-1" type="radio" ng-model="radioValue" value="Rank" name="radioption" ng-change='getcheckedItem(value)'>
                     <label class="col-lg-11" for="inlineRadio2"> Driver Rank </label>
-                    <input class="col-lg-1" type="radio" value="events" name="radioption" ng-model="radioValue" ng-change='getcheckedItem(value)'>
+                    <input class="col-lg-1" type="radio" value="Events" name="radioption" ng-model="radioValue" ng-change='getcheckedItem(value)'>
                     <label class="col-lg-11" for="inlineRadio3"> All Events </label>
                     <input class="col-lg-1" type="radio" value="hb" name="radioption" ng-model="radioValue" ng-change='getcheckedItem(value)'>
                     <label class="col-lg-11" for="inlineRadio4"> Hard Brake </label>
@@ -449,9 +511,9 @@
             <div class="chartType-checkboxes">
                 <span class="col-lg-8">CHART SETTINGS:</span>
                 <div class="col-lg-8 div-checkboxes">
-                    <input class="col-lg-1" type="radio" value="option1" name="radiocharts" checked="">
+                    <input class="col-lg-1" type="radio" ng-model="chartType" value="linechart" name="radiocharts" checked="">
                     <label class="col-lg-11" for="inlineRadio1"> Line </label>
-                    <input class="col-lg-1" type="radio" value="option2" name="radiocharts">
+                    <input class="col-lg-1" type="radio" ng-model="chartType" value="barchart" name="radiocharts">
                     <label class="col-lg-11" for="inlineRadio2"> Column Bar</label>
                 </div>
             </div>
