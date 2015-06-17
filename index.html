@@ -1,0 +1,111 @@
+﻿<!doctype html>
+<html>
+<head>
+    <title>ScoreBoard</title>
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+    <script src="http://code.jquery.com/jquery-1.10.0.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular.min.js"></script>
+    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+    <script type="text/javascript" src="CreateLineChart.js"></script>
+    <script type="text/javascript" src="tableSortIconToggling.js"></script>
+    <script type="text/javascript" src="controller.js"></script>
+    <link href="style.css" rel="stylesheet" />
+</head>
+
+<body ng-app="myApp" ng-controller="myCtrl">
+    <div class="row header">
+        <div class="col-lg-7">
+            <span class="col-lg-12 span-company">COMPANY NAME</span>
+            <span class="col-lg-12 span-scoreboard">Scoreboard</span>
+        </div>
+        <div class="col-lg-5">
+            <span class="col-lg-12">TIME PERIOD</span>
+            <span class="col-lg-6">...</span>
+            <select class="form-control col-lg-6 dropdown-days">
+                <option selected>Last 30 Days</option>
+                <option selected>Last 30 Days</option>
+            </select>
+        </div>
+    </div>
+    <div class="row content">
+        <div class="left-search col-lg-3">
+            <span class="col-lg-8">DRIVERS SCORE</span>
+            <span class="col-lg-10">FOR THE LAST 30 DAYS</span>
+            <div class="search-checkboxes">
+                <span class="col-lg-8">SHOW:</span>
+                <div class="col-lg-8 div-checkboxes">
+                    <input class="col-lg-1" type="radio" id="rdobtnscore" ng-model="radioValue" value="Score" name="radioption" ng-change='getcheckedItem()'>
+                    <label class="col-lg-11" for="inlineRadio1"> Driver Score </label>
+                    <input class="col-lg-1" type="radio" ng-model="radioValue" value="Rank" name="radioption" ng-change='getcheckedItem()'>
+                    <label class="col-lg-11" for="inlineRadio2"> Driver Rank </label>
+                    <input class="col-lg-1" type="radio" value="Events" name="radioption" ng-model="radioValue" ng-change='getcheckedItem()'>
+                    <label class="col-lg-11" for="inlineRadio3"> All Events </label>
+                    <input class="col-lg-1" type="radio" value="hb" name="radioption" ng-model="radioValue" ng-change='getcheckedItem()'>
+                    <label class="col-lg-11" for="inlineRadio4"> Hard Brake </label>
+                    <input class="col-lg-1" type="radio" value="ra" name="radioption" ng-model="radioValue" ng-change='getcheckedItem()'>
+                    <label class="col-lg-11" for="inlineRadio5"> Rapid Accelaration </label>
+                    <input class="col-lg-1" type="radio" value="sp" name="radioption" ng-model="radioValue" ng-change='getcheckedItem()'>
+                    <label class="col-lg-11" for="inlineRadio6"> Speeding </label>
+                    <input class="col-lg-1" type="radio" value="cr" name="radioption" ng-model="radioValue" ng-change='getcheckedItem()'>
+                    <label class="col-lg-11" for="inlineRadio7"> Crash </label>
+                </div>
+            </div>
+            <div class="chartType-checkboxes">
+                <span class="col-lg-8">CHART SETTINGS:</span>
+                <div class="col-lg-8 div-checkboxes">
+                    <input class="col-lg-1" type="radio" ng-model="chartType" value="linechart" name="radiocharts" checked="">
+                    <label class="col-lg-11" for="inlineRadio1"> Line </label>
+                    <input class="col-lg-1" type="radio" ng-model="chartType" value="barchart" name="radiocharts">
+                    <label class="col-lg-11" for="inlineRadio2"> Column Bar</label>
+                </div>
+            </div>
+        </div>
+        <div id="chart_area" class="col-lg-9">
+
+        </div>
+    </div>
+    <div class="row table">
+        <table id="driverTable" class="table" cellspacing="0">
+            <thead>
+                <tr>
+                    <th>MANAGER<span class="icon-desc" ng-click="sort($event)" data="Name"></span></th>
+                    <th>RANK<span class="icon-asec" ng-click="sort($event)" data="Rank"></span></th>
+                    <th>SCORE<span class="icon-desc" ng-click="sort($event)" data="Score"></span></th>
+                    <th>BRAKING<span class="icon-desc" ng-click="sort($event)" data="HB"></span></th>
+                    <th>ACCELARATION<span class="icon-desc" ng-click="sort($event)" data="RA"></span></th>
+                    <th>SPEEDING<span class="icon-desc" ng-click="sort($event)" data="SP"></span></th>
+                    <th># OF EVENTS<span class="icon-desc" ng-click="sort($event)" data="AllEvents"></span></th>
+                    <th>DRIVE TIME<span class="icon-desc" ng-click="sort($event)" data="DriveTime"></span></th>
+                </tr>
+            </thead>
+
+            <tfoot>
+                <tr>
+                    <th>MANAGER<span class="icon-desc" ng-click="sort($event)" data="Name"></span></th>
+                    <th>RANK<span class="icon-asec" ng-click="sort($event)" data="Rank"></span></th>
+                    <th>SCORE<span class="icon-desc" ng-click="sort($event)" data="Score"></span></th>
+                    <th>BRAKING<span class="icon-desc" ng-click="sort($event)" data="HB"></span></th>
+                    <th>ACCELARATION<span class="icon-desc" ng-click="sort($event)" data="RA"></span></th>
+                    <th>SPEEDING<span class="icon-desc" ng-click="sort($event)" data="SP"></span></th>
+                    <th># OF EVENTS<span class="icon-desc" ng-click="sort($event)" data="AllEvents"></span></th>
+                    <th>DRIVE TIME<span class="icon-desc" ng-click="sort($event)" data="DriveTime"></span></th>
+                </tr>
+            </tfoot>
+
+            <tbody>
+                <tr ng-repeat="item in resultset">
+                    <td>{{item.Name}}</td>
+                    <td>{{item.Rank}}</td>
+                    <td>{{item.Score}}</td>
+                    <td>{{item.HB}}</td>
+                    <td>{{item.RA}}</td>
+                    <td>{{item.SP}}</td>
+                    <td>{{item.AllEvents}}</td>
+                    <td>{{item.DriveTime}}</td>
+                </tr>
+            </tbody>
+
+        </table>
+    </div>
+</body>
+</html>

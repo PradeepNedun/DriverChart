@@ -1,0 +1,83 @@
+﻿
+    body {
+        background-color: rgb(241, 241, 241);
+        overflow-x: hidden;
+    }
+
+    .dropdown-days {
+        width: 50%;
+        border: 0px solid;
+        color: rgb(100, 160, 225);
+        height: 30px;
+        box-shadow: none;
+        background-color: rgb(241, 241, 241);
+    }
+
+    .header {
+        line-height: 1.5;
+        color: rgb(69, 72, 63);
+        font-family: "calbri";
+        box-shadow: 0 4px 9px -2px rgb(201, 193, 193);
+    }
+
+    .span-scoreboard {
+        font-size: 30px;
+        margin-top: -15px;
+    }
+
+    .header span {
+    }
+
+    .content {
+        padding-top: 15px;
+    }
+
+    .left-search span {
+        font-size: 15px;
+        font-weight: bold;
+        font-family: "Times New Roman", Georgia, Serif;
+    }
+
+    .search-checkboxes {
+        padding-top: 25%;
+    }
+
+    .div-checkboxes > label {
+        font-weight: normal !important;
+    }
+
+    .chartType-checkboxes {
+        padding-top: 55%;
+    }
+
+    table {
+        margin-left: 15px;
+        color: gray;
+        margin-top:40px;
+    }
+
+    .table > thead > tr > th, .table > tfoot > tr > th {
+        border: 2px solid rgb(212, 207, 210);
+        box-shadow: 1px 2px 10px 0px rgb(201, 193, 193);
+    }
+
+    .table > tbody > tr > td {
+        border-top: none !important;
+        border-right: 2px solid rgb(212, 207, 210);
+    }
+
+    .icon-asec {
+        background: url('https://cdn.datatables.net/plug-ins/28e7751dbec/integration/bootstrap/images/sort_asc.png') no-repeat center right;
+        padding-left: 25px;
+        padding-bottom: 6px;
+        float: right;
+        padding-top: 16px;
+    }
+
+    .icon-desc {
+        background: url('https://cdn.datatables.net/plug-ins/28e7751dbec/integration/bootstrap/images/sort_desc.png') no-repeat center right;
+        padding-left: 25px;
+        padding-top: 7px;
+        float: right;
+        padding-top: 14px;
+    }
