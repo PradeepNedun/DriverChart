@@ -32,7 +32,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="controller.js" />
-    <Compile Include="CreateLineChart.js" />
+    <Compile Include="CreateChart.js" />
     <Compile Include="server.js" />
     <Compile Include="tableSortIconToggling.js" />
     <Content Include="index.html" />

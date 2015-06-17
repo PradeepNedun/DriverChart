@@ -14,10 +14,10 @@
                                 "EventDate": "6/11/2015",
                                 "DailyScore": 2500,
                                 "DailyAllEvents": 15,
-                                "DailyHB": 25,
+                                "DailyHB": 5,
                                 "DailyRA": 10,
-                                "DailySP": 10,
-                                "DailyCR": 5
+                                "DailySP": 20,
+                                "DailyCR": 30
                             }
                         },
 
@@ -27,10 +27,10 @@
                                 "EventDate": "6/10/2015",
                                 "DailyScore": 1500,
                                 "DailyAllEvents": 20,
-                                "DailyHB": 20,
-                                "DailyRA": 15,
-                                "DailySP": 15,
-                                "DailyCR": 10
+                                "DailyHB": 10,
+                                "DailyRA": 20,
+                                "DailySP": 30,
+                                "DailyCR": 40
                             }
                         },
 						{
@@ -39,10 +39,10 @@
                                 "EventDate": "6/08/2015",
                                 "DailyScore": 1100,
                                 "DailyAllEvents": 20,
-                                "DailyHB": 20,
-                                "DailyRA": 15,
-                                "DailySP": 15,
-                                "DailyCR": 10
+                                "DailyHB": 50,
+                                "DailyRA": 100,
+                                "DailySP": 120,
+                                "DailyCR": 80
                             }
                         }
                     ]
@@ -64,10 +64,10 @@
                                 "EventDate": "6/11/2015",
                                 "DailyScore": 5000,
                                 "DailyAllEvents": 15,
-                                "DailyHB": 25,
-                                "DailyRA": 10,
-                                "DailySP": 10,
-                                "DailyCR": 5
+                                "DailyHB": 60,
+                                "DailyRA": 70,
+                                "DailySP": 80,
+                                "DailyCR": 90
                             }
                         },
 
@@ -91,8 +91,8 @@
                                 "DailyAllEvents": 20,
                                 "DailyHB": 20,
                                 "DailyRA": 15,
-                                "DailySP": 15,
-                                "DailyCR": 10
+                                "DailySP": 18,
+                                "DailyCR": 7
                             }
                         }
                     ]
