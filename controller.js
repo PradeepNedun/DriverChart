@@ -23,6 +23,15 @@ app.controller('myCtrl', function ($scope, $element, $http, $q) {
     $scope.getcheckedItem = function () {
         var selectedOption = $scope.radioValue;
         var chartData = [];
+
+        if (selectedOption == "Rank") {
+            for (i = 0; i < $scope.resultset.length; i++) {
+                var dailyScoreObj = {};
+                dailyScoreObj.Rank = $scope.resultset[i].Rank;
+                dailyScoreObj.Name = $scope.resultset[i].Name;
+                chartData.push(dailyScoreObj);
+            }
+        }
         for (var obj in $scope.jsonArr.Drivers) {
             for (var props in $scope.jsonArr.Drivers[obj]) {
                 
@@ -67,6 +76,7 @@ app.controller('myCtrl', function ($scope, $element, $http, $q) {
                 }
             }
         }
+        console.log(chartData);
         drawChart(chartData);
     };
     

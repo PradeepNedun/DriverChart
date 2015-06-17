@@ -25,9 +25,6 @@
         margin-top: -15px;
     }
 
-    .header span {
-    }
-
     .content {
         padding-top: 15px;
     }
@@ -64,6 +61,10 @@
     .table > tbody > tr > td {
         border-top: none !important;
         border-right: 2px solid rgb(212, 207, 210);
+    }
+
+    .table>thead>tr>th {
+        vertical-align: 0 ! important;
     }
 
     .icon-asec {

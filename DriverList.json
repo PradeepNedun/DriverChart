@@ -32,6 +32,18 @@
                                 "DailySP": 15,
                                 "DailyCR": 10
                             }
+                        },
+						{
+                            "date":
+ {
+                                "EventDate": "6/08/2015",
+                                "DailyScore": 1100,
+                                "DailyAllEvents": 20,
+                                "DailyHB": 20,
+                                "DailyRA": 15,
+                                "DailySP": 15,
+                                "DailyCR": 10
+                            }
                         }
                     ]
                 }
@@ -63,10 +75,22 @@
                             "date":
  {
                                 "EventDate": "6/10/2015",
-                                "DailyScore": 1500,
+                                "DailyScore": 1900,
                                 "DailyAllEvents": 20,
                                 "DailyHB": 20,
                                 "DailyRA": 12,
+                                "DailySP": 15,
+                                "DailyCR": 10
+                            }
+                        },
+						{
+                            "date":
+ {
+                                "EventDate": "6/08/2015",
+                                "DailyScore": 4000,
+                                "DailyAllEvents": 20,
+                                "DailyHB": 20,
+                                "DailyRA": 15,
                                 "DailySP": 15,
                                 "DailyCR": 10
                             }
@@ -103,6 +127,18 @@
  {
                                 "EventDate": "6/10/2015",
                                 "DailyScore": 1000,
+                                "DailyAllEvents": 20,
+                                "DailyHB": 20,
+                                "DailyRA": 15,
+                                "DailySP": 15,
+                                "DailyCR": 10
+                            }
+                        },
+						{
+                            "date":
+ {
+                                "EventDate": "6/08/2015",
+                                "DailyScore": 900,
                                 "DailyAllEvents": 20,
                                 "DailyHB": 20,
                                 "DailyRA": 15,
