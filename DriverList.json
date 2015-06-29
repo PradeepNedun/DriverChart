@@ -1,130 +1,81 @@
-﻿{
+﻿    {
         "Drivers":
- [
+        [
             {
-                "Driver":
- {
-                    "name": "JamesJacobs",
+                    "DriverName": "JamesJacobs",
                     "DriveTime": "33hr 59 m",
                     "Date":
- [
+                [
                         {
-                            "date":
- {
                                 "EventDate": "6/11/2015",
                                 "DailyScore": 2500,
                                 "DailyAllEvents": 15,
-                                "DailyHB": 5,
+                                "DailyHB": 25,
                                 "DailyRA": 10,
-                                "DailySP": 20,
-                                "DailyCR": 30
-                            }
+                                "DailySP": 10,
+                                "DailyCR": 5
                         },
 
                         {
-                            "date":
- {
-                                "EventDate": "6/10/2015",
+                           "EventDate": "6/10/2015",
                                 "DailyScore": 1500,
                                 "DailyAllEvents": 20,
-                                "DailyHB": 10,
-                                "DailyRA": 20,
-                                "DailySP": 30,
-                                "DailyCR": 40
-                            }
-                        },
-						{
-                            "date":
- {
-                                "EventDate": "6/08/2015",
-                                "DailyScore": 1100,
-                                "DailyAllEvents": 20,
-                                "DailyHB": 50,
-                                "DailyRA": 100,
-                                "DailySP": 120,
-                                "DailyCR": 80
-                            }
+                                "DailyHB": 20,
+                                "DailyRA": 15,
+                                "DailySP": 15,
+                                "DailyCR": 10
+
                         }
-                    ]
-                }
+                ]
 
             },
 
             {
-                "Driver":
-
- {
-                    "name": "GaryGaitor",
+                    "DriverName": "GaryGaitor",
                     "DriveTime": "3hr 50 m",
                     "Date":
- [
+                [
                         {
-                            "date":
- {
-                                "EventDate": "6/11/2015",
+                               "EventDate": "6/11/2015",
                                 "DailyScore": 5000,
                                 "DailyAllEvents": 15,
-                                "DailyHB": 60,
-                                "DailyRA": 70,
-                                "DailySP": 80,
-                                "DailyCR": 90
-                            }
+                                "DailyHB": 25,
+                                "DailyRA": 10,
+                                "DailySP": 10,
+                                "DailyCR": 5
+
                         },
 
                         {
-                            "date":
- {
+
                                 "EventDate": "6/10/2015",
-                                "DailyScore": 1900,
+                                "DailyScore": 1500,
                                 "DailyAllEvents": 20,
                                 "DailyHB": 20,
                                 "DailyRA": 12,
                                 "DailySP": 15,
                                 "DailyCR": 10
-                            }
-                        },
-						{
-                            "date":
- {
-                                "EventDate": "6/08/2015",
-                                "DailyScore": 4000,
-                                "DailyAllEvents": 20,
-                                "DailyHB": 20,
-                                "DailyRA": 15,
-                                "DailySP": 18,
-                                "DailyCR": 7
-                            }
                         }
-                    ]
-
-                }
+                ]
 
             },
 
             {
-                "Driver":
-
- {
-                    "name": "BillyBishop",
+                    "DriverName": "BillyBishop",
                     "DriveTime": "30hr 50 m",
                     "Date":
- [
+                [
                         {
-                            "date":
- {
-                                "EventDate": "6/11/2015",
+                               "EventDate": "6/11/2015",
                                 "DailyScore": 2500,
                                 "DailyAllEvents": 15,
                                 "DailyHB": 25,
                                 "DailyRA": 18,
                                 "DailySP": 10,
                                 "DailyCR": 5
-                            }
                         },
 
                         {
-                            "date":
- {
                                 "EventDate": "6/10/2015",
                                 "DailyScore": 1000,
                                 "DailyAllEvents": 20,
@@ -132,23 +83,9 @@
                                 "DailyRA": 15,
                                 "DailySP": 15,
                                 "DailyCR": 10
-                            }
-                        },
-						{
-                            "date":
- {
-                                "EventDate": "6/08/2015",
-                                "DailyScore": 900,
-                                "DailyAllEvents": 20,
-                                "DailyHB": 20,
-                                "DailyRA": 15,
-                                "DailySP": 15,
-                                "DailyCR": 10
-                            }
                         }
-                    ]
+                ]
 
-                }
             }
         ]
     }

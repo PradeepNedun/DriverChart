@@ -23,7 +23,6 @@
             <span class="col-lg-6">...</span>
             <select class="form-control col-lg-6 dropdown-days">
                 <option selected>Last 30 Days</option>
-                <option selected>Last 30 Days</option>
             </select>
         </div>
     </div>
@@ -33,30 +32,48 @@
             <span class="col-lg-10">FOR THE LAST 30 DAYS</span>
             <div class="search-checkboxes">
                 <span class="col-lg-8">SHOW:</span>
-                <div class="col-lg-8 div-checkboxes">
-                    <input class="col-lg-1" type="radio" id="rdobtnscore" ng-model="radioValue" value="Score" name="radioption" ng-change='getcheckedItem()'>
-                    <label class="col-lg-11" for="inlineRadio1"> Driver Score </label>
-                    <input class="col-lg-1" type="radio" ng-model="radioValue" value="Rank" name="radioption" ng-change='getcheckedItem()'>
-                    <label class="col-lg-11" for="inlineRadio2"> Driver Rank </label>
-                    <input class="col-lg-1" type="radio" value="Events" name="radioption" ng-model="radioValue" ng-change='getcheckedItem()'>
-                    <label class="col-lg-11" for="inlineRadio3"> All Events </label>
-                    <input class="col-lg-1" type="radio" value="hb" name="radioption" ng-model="radioValue" ng-change='getcheckedItem()'>
-                    <label class="col-lg-11" for="inlineRadio4"> Hard Brake </label>
-                    <input class="col-lg-1" type="radio" value="ra" name="radioption" ng-model="radioValue" ng-change='getcheckedItem()'>
-                    <label class="col-lg-11" for="inlineRadio5"> Rapid Accelaration </label>
-                    <input class="col-lg-1" type="radio" value="sp" name="radioption" ng-model="radioValue" ng-change='getcheckedItem()'>
-                    <label class="col-lg-11" for="inlineRadio6"> Speeding </label>
-                    <input class="col-lg-1" type="radio" value="cr" name="radioption" ng-model="radioValue" ng-change='getcheckedItem()'>
-                    <label class="col-lg-11" for="inlineRadio7"> Crash </label>
+                <div class="col-lg-8 div-checkboxes radio">
+                    <label class="col-lg-12">
+                        <input class="col-lg-6" type="radio" id="rdobtnscore" ng-model="radioValue" value="Score" name="radioption" ng-change='getcheckedItem()'>
+                        Driver Score
+                    </label>
+                     <label class="col-lg-12">
+                        <input class="col-lg-6" type="radio" ng-model="radioValue" value="Rank" name="radioption" ng-change='getcheckedItem()'>
+                        Driver Rank
+                    </label>
+                    <label class="col-lg-12">
+                        <input class="col-lg-6" type="radio" value="DailyAllEvents" name="radioption" ng-model="radioValue" ng-change='getcheckedItem()'>
+                        All Events
+                    </label>
+                    <label class="col-lg-12">
+                        <input class="col-lg-6" type="radio" value="DailyHB" name="radioption" ng-model="radioValue" ng-change='getcheckedItem()'>
+                        Hard Brake
+                    </label>
+                    <label class="col-lg-12">
+                    <input class="col-lg-6" type="radio" value="DailyRA" name="radioption" ng-model="radioValue" ng-change='getcheckedItem()'>
+                        Rapid Accelaration 
+                    </label>
+                    <label class="col-lg-12">
+                    <input class="col-lg-6" type="radio" value="DailySP" name="radioption" ng-model="radioValue" ng-change='getcheckedItem()'>
+                        Speeding 
+                    </label>
+                    <label class="col-lg-12">
+                    <input class="col-lg-6" type="radio" value="DailyCR" name="radioption" ng-model="radioValue" ng-change='getcheckedItem()'>
+                        Crash 
+                    </label>
                 </div>
             </div>
             <div class="chartType-checkboxes">
                 <span class="col-lg-8">CHART SETTINGS:</span>
-                <div class="col-lg-8 div-checkboxes">
-                    <input class="col-lg-1" type="radio" ng-model="chartType" value="linechart" name="radiocharts">
-                    <label class="col-lg-11" for="inlineRadio1"> Line </label>
-                    <input class="col-lg-1" type="radio" ng-model="chartType" value="barchart" name="radiocharts">
-                    <label class="col-lg-11" for="inlineRadio2"> Column Bar</label>
+                <div class="col-lg-8 radio div-checkboxes">
+                   <label class="col-lg-12">
+                        <input class="col-lg-6" type="radio" ng-model="chartType" value="linechart" name="radiocharts">
+                        Line 
+                    </label>
+                    <label class="col-lg-12">
+                        <input class="col-lg-6" type="radio" ng-model="chartType" value="barchart" name="radiocharts">
+                        Column Bar
+                    </label>
                 </div>
             </div>
         </div>

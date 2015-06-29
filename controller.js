@@ -13,13 +13,19 @@ app.controller('myCtrl', function ($scope, $element, $http, $q) {
             });
         });
     };
-    $scope.radioValue = 'Score';
+    $scope.radioValue = 'DailyScore';
     $scope.chartType = 'linechart';
     $scope.resultset = [];
     var today = new Date();
     var date = new Date(today.getTime() - 30 * 24 * 60 * 60 * 1000);
     var formattedate = (date.getMonth() + 1) + '/' + date.getDate() + '/' + date.getFullYear();
 
+    $scope.getcheckedItem = function () {
+        var selectedOption = $scope.radioValue;
+        var chartData = [];
+
+        drawChart(chartData);
+    };
     $scope.getcheckedItem = function () {
         var selectedOption = $scope.radioValue;
         var chartData = [];
@@ -32,50 +38,17 @@ app.controller('myCtrl', function ($scope, $element, $http, $q) {
                 }
             }
             for (var obj in $scope.jsonArr.Drivers) {
-                for (var props in $scope.jsonArr.Drivers[obj]) {
-                    
-                    for (items in $scope.jsonArr.Drivers[obj][props]["Date"]) {
-                        var dailyScoreObj = {};
-                        if (selectedOption == "Score") {
-                            dailyScoreObj.date = $scope.jsonArr.Drivers[obj][props]["Date"][items].date.EventDate;
-                            dailyScoreObj.Score = $scope.jsonArr.Drivers[obj][props]["Date"][items].date.DailyScore;
-                            dailyScoreObj.Name = $scope.jsonArr.Drivers[obj][props].name;
-                            chartData.push(dailyScoreObj);
-                        }
-                        if (selectedOption == "Events") {
-                            dailyScoreObj.date = $scope.jsonArr.Drivers[obj][props]["Date"][items].date.EventDate;
-                            dailyScoreObj.Events = $scope.jsonArr.Drivers[obj][props]["Date"][items].date.DailyAllEvents;
-                            dailyScoreObj.Name = $scope.jsonArr.Drivers[obj][props].name;
-                            chartData.push(dailyScoreObj);
-                        }
-                        if (selectedOption == "hb") {
-                            dailyScoreObj.date = $scope.jsonArr.Drivers[obj][props]["Date"][items].date.EventDate;
-                            dailyScoreObj.HB = $scope.jsonArr.Drivers[obj][props]["Date"][items].date.DailyHB;
-                            dailyScoreObj.Name = $scope.jsonArr.Drivers[obj][props].name;
-                            chartData.push(dailyScoreObj);
-                        }
-                        if (selectedOption == "ra") {
-                            dailyScoreObj.date = $scope.jsonArr.Drivers[obj][props]["Date"][items].date.EventDate;
-                            dailyScoreObj.RA = $scope.jsonArr.Drivers[obj][props]["Date"][items].date.DailyRA;
-                            dailyScoreObj.Name = $scope.jsonArr.Drivers[obj][props].name;
-                            chartData.push(dailyScoreObj);
-                        }
-                        if (selectedOption == "sp") {
-                            dailyScoreObj.date = $scope.jsonArr.Drivers[obj][props]["Date"][items].date.EventDate;
-                            dailyScoreObj.SP = $scope.jsonArr.Drivers[obj][props]["Date"][items].date.DailySP;
-                            dailyScoreObj.Name = $scope.jsonArr.Drivers[obj][props].name;
-                            chartData.push(dailyScoreObj);
-                        }
-                        if (selectedOption == "cr") {
-                            dailyScoreObj.date = $scope.jsonArr.Drivers[obj][props]["Date"][items].date.EventDate;
-                            dailyScoreObj.CR = $scope.jsonArr.Drivers[obj][props]["Date"][items].date.DailyCR;
-                            dailyScoreObj.Name = $scope.jsonArr.Drivers[obj][props].name;
-                            chartData.push(dailyScoreObj);
-                        }
-                    }
+                for (items in $scope.jsonArr.Drivers[obj]["Date"]) {
+                    console.log($scope.jsonArr.Drivers[obj]["Date"][items]["EventDate"]);
+                    var dailyScoreObj = {};
+                    if (selectedOption) {
+                        dailyScoreObj.date = $scope.jsonArr.Drivers[obj]["Date"][items]["EventDate"];
+                        dailyScoreObj.Score = $scope.jsonArr.Drivers[obj]["Date"][items][selectedOption];
+                        dailyScoreObj.Name = $scope.jsonArr.Drivers[obj].DriverName;
+                        chartData.push(dailyScoreObj);
+                    } 
                 }
-        }
-        console.log('chartdata'+ chartData);
+            }   
         if ($scope.chartType == 'linechart') {
             drawLineChart(chartData);
         }
@@ -100,20 +73,19 @@ app.controller('myCtrl', function ($scope, $element, $http, $q) {
             $scope.tableList.DriveTime = 0;
             $scope.tableList.Rank = "";
             
+            $scope.tableList.Name = $scope.jsonArr.Drivers[obj].DriverName;
+            $scope.tableList.DriveTime = $scope.jsonArr.Drivers[obj].DriveTime;
             
-            for (var props in $scope.jsonArr.Drivers[obj]) {
-                $scope.tableList.Name = $scope.jsonArr.Drivers[obj][props]["name"];
-                $scope.tableList.DriveTime = $scope.jsonArr.Drivers[obj][props]["DriveTime"];
-                
-                for (items in $scope.jsonArr.Drivers[obj][props]["Date"]) {
-                    $scope.tableList.Score = $scope.tableList.Score + $scope.jsonArr.Drivers[obj][props]["Date"][items]["date"]["DailyScore"];
-                    $scope.tableList.AllEvents = $scope.tableList.AllEvents + $scope.jsonArr.Drivers[obj][props]["Date"][items]["date"]["DailyAllEvents"];
-                    $scope.tableList.DailyHB = $scope.tableList.DailyHB + $scope.jsonArr.Drivers[obj][props]["Date"][items]["date"]["DailyHB"];
-                    $scope.tableList.DailyRA = $scope.tableList.DailyRA + $scope.jsonArr.Drivers[obj][props]["Date"][items]["date"]["DailyRA"];
-                    $scope.tableList.DailySP = $scope.tableList.DailySP + $scope.jsonArr.Drivers[obj][props]["Date"][items]["date"]["DailySP"];
-                    $scope.tableList.DailyCR = $scope.tableList.DailyCR + $scope.jsonArr.Drivers[obj][props]["Date"][items]["date"]["DailyCR"];
+                for (items in $scope.jsonArr.Drivers[obj]["Date"]) {
+                    console.log($scope.jsonArr.Drivers[obj]["Date"][items].DailyScore);
+                    $scope.tableList.Score = $scope.tableList.Score + $scope.jsonArr.Drivers[obj]["Date"][items].DailyScore;
+                    $scope.tableList.AllEvents = $scope.tableList.AllEvents + $scope.jsonArr.Drivers[obj]["Date"][items].DailyAllEvents;
+                    $scope.tableList.DailyHB = $scope.tableList.DailyHB + $scope.jsonArr.Drivers[obj]["Date"][items].DailyHB;
+                    $scope.tableList.DailyRA = $scope.tableList.DailyRA + $scope.jsonArr.Drivers[obj]["Date"][items].DailyRA;
+                    $scope.tableList.DailySP = $scope.tableList.DailySP + $scope.jsonArr.Drivers[obj]["Date"][items].DailySP;
+                    $scope.tableList.DailyCR = $scope.tableList.DailyCR + $scope.jsonArr.Drivers[obj]["Date"][items].DailyCR;
                 }
-            }
+
             $scope.result.Name = $scope.tableList.Name;
             $scope.result.Rank = $scope.tableList.Rank;
             $scope.result.Score = $scope.tableList.Score;
