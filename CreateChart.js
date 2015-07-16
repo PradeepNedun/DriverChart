@@ -1,22 +1,5 @@
 ﻿app.factory('createChartFactory', function () {
-    function getnames(chartData) {
-        var names = [];
-        var temp = null;
-        for (i = 0; i < chartData.length; i++) {
-            if (names.length > 0) {
-                if (names.indexOf(chartData[i].Name) > -1) {
-                    names = names;
-                }
-                else {
-                    names.push(chartData[i].Name);
-                }
-            }
-            else {
-                names.push(chartData[i].Name);
-            }
-        }
-        return names;
-    };
+    
     return {
         drawLineChart : function (chartData) {
             var rowData = [];
@@ -24,7 +7,7 @@
             var arrOfArr = [];
             
             if (chartData[0].Rank) {
-                rowHeader.push(getnames(chartData));
+                rowHeader.push(this.getnames(chartData));
                 rowData.push(rowHeader[0]);
                 var arrobj = [];
                 console.log(rowHeader);
@@ -36,7 +19,7 @@
                 console.log(arrOfArr);
             }
             else {
-                rowHeader.push(getnames(chartData));
+                rowHeader.push(this.getnames(chartData));
                 rowHeader[0].push("Date");
                 console.log(chartData);
                 
@@ -118,7 +101,7 @@
             var arrOfArr = [];
             
             if (chartData[0].Rank) {
-                rowHeader.push(getnames(chartData));
+                rowHeader.push(this.getnames(chartData));
                 rowData.push(rowHeader[0]);
                 var arrobj = [];
                 for (i = 0; i < chartData.length; i++) {
@@ -129,7 +112,7 @@
                 console.log(arrOfArr);
             }
             else {
-                rowHeader.push(getnames(chartData));
+                rowHeader.push(this.getnames(chartData));
                 rowHeader[0].push("Date");
                 console.log(chartData);
                 
@@ -191,6 +174,24 @@
             new google.visualization.BarChart(document.getElementById('chart_area')).draw(data, {
                 width: 600, height: 400, vAxis: { title: "Date" }, hAxis: { title: "Score" }
             });
+        },
+        getnames: function (chartData) {
+            var names = [];
+            var temp = null;
+            for (i = 0; i < chartData.length; i++) {
+                if (names.length > 0) {
+                    if (names.indexOf(chartData[i].Name) > -1) {
+                        names = names;
+                    }
+                    else {
+                        names.push(chartData[i].Name);
+                    }
+                }
+                else {
+                    names.push(chartData[i].Name);
+                }
+            }
+            return names;
         }
     }
 });
